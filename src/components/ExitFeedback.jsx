@@ -158,10 +158,10 @@ export default function ExitFeedback() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 60 }}
               transition={{ type: 'spring', damping: 28, stiffness: 340 }}
-              className="fixed bottom-4 left-1/2 -translate-x-1/2 z-[300] w-[calc(100vw-2rem)] sm:w-[440px]"
+              className="fixed bottom-0 sm:bottom-4 left-1/2 -translate-x-1/2 z-[300] w-full sm:w-[440px] px-3 sm:px-0"
             >
               <div
-                className="glass rounded-2xl border border-white/10 shadow-2xl shadow-black/60 overflow-hidden"
+                className="glass rounded-t-2xl sm:rounded-2xl border border-white/10 shadow-2xl shadow-black/60 overflow-hidden max-h-[92vh] overflow-y-auto"
                 style={{ backgroundColor: 'color-mix(in srgb, var(--bg) 92%, transparent)' }}
               >
                 {/* Accent bar */}

@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { FaGithub, FaLinkedin, FaWhatsapp, FaEnvelope, FaVolumeUp, FaCalendarAlt, FaPause, FaPlay } from 'react-icons/fa'
+import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import { FaGithub, FaLinkedin, FaWhatsapp, FaEnvelope, FaCalendarAlt } from 'react-icons/fa'
 import { MdBusinessCenter } from 'react-icons/md'
 import { PERSONAL_INFO } from '../constants'
 import profileImg from '../assets/goutham-opt.jpg'
@@ -8,103 +8,13 @@ import ScheduleModal from './ScheduleModal'
 import TechSphere from './TechSphere'
 import MagneticButton from './MagneticButton'
 
-const VOICEOVER_SCRIPT =
-  "Hi, I'm Goutham Rathod, an Associate Software Engineer from Hyderabad. " +
-  "I build data pipelines, AI-powered integrations, and full-stack applications. " +
-  "I'm passionate about solving real business problems through technology and I'm currently open to new opportunities. " +
-  "Feel free to explore my work and let's connect!"
-
 const TAGLINES = PERSONAL_INFO.taglines
-
-// voice state machine: idle → playing → paused → idle
-// 'idle' | 'playing' | 'paused'
-
-// Known male Indian voice name substrings (case-insensitive)
-const MALE_HINTS = ['hemant', 'ravi', 'karthik', 'prabhat', 'suresh', 'wavenet-c', 'standard-c']
-// Known female Indian voice name substrings to skip
-const FEMALE_HINTS = ['heera', 'aditi', 'raveena', 'kalpana', 'lekha', 'meera', 'priya', 'wavenet-a', 'wavenet-b', 'standard-a', 'standard-b']
-
-function pickMaleIndianVoice() {
-  const voices = window.speechSynthesis.getVoices()
-  if (!voices.length) return null
-  const n = v => v.name.toLowerCase()
-
-  // 1. Explicitly known male Indian names
-  for (const hint of MALE_HINTS) {
-    const v = voices.find(v => n(v).includes(hint))
-    if (v) return { voice: v, pitch: 1.0, rate: 0.88 }
-  }
-
-  // 2. en-IN that is NOT a known female name — use lower pitch
-  const nonFemaleIndian = voices.find(v =>
-    (v.lang === 'en-IN' || v.lang.startsWith('en-IN')) &&
-    !FEMALE_HINTS.some(f => n(v).includes(f))
-  )
-  if (nonFemaleIndian) return { voice: nonFemaleIndian, pitch: 0.72, rate: 0.85 }
-
-  // 3. Any en-IN voice with forced low pitch
-  const anyIndian = voices.find(v => v.lang === 'en-IN' || v.lang.startsWith('en-IN'))
-  if (anyIndian) return { voice: anyIndian, pitch: 0.68, rate: 0.85 }
-
-  // 4. Any Indian-locale English voice
-  const anyIN = voices.find(v => v.lang.includes('IN') && v.lang.startsWith('en'))
-  if (anyIN) return { voice: anyIN, pitch: 0.70, rate: 0.85 }
-
-  return null
-}
 
 export default function Hero() {
   const [taglineIndex, setTaglineIndex] = useState(0)
   const [displayed, setDisplayed]       = useState('')
   const [typing, setTyping]             = useState(true)
-  const [voiceState, setVoiceState]     = useState('idle') // idle | playing | paused
   const [showSchedule, setShowSchedule] = useState(false)
-  const utteranceRef                    = useRef(null)
-
-  // Pre-load voices list — some browsers need this trigger
-  useEffect(() => {
-    const load = () => window.speechSynthesis.getVoices()
-    load()
-    window.speechSynthesis.addEventListener?.('voiceschanged', load)
-    return () => {
-      window.speechSynthesis.removeEventListener?.('voiceschanged', load)
-      window.speechSynthesis.cancel()
-    }
-  }, [])
-
-  // ── Voiceover controls ────────────────────────────────────
-  const handleVoice = () => {
-    if (voiceState === 'idle') {
-      window.speechSynthesis.cancel()
-      const u = new SpeechSynthesisUtterance(VOICEOVER_SCRIPT)
-      const result = pickMaleIndianVoice()
-      if (result) {
-        u.voice = result.voice
-        u.pitch = result.pitch
-        u.rate  = result.rate
-      } else {
-        // No Indian voice — use deep pitch as last resort
-        u.pitch = 0.70
-        u.rate  = 0.88
-      }
-      u.lang   = 'en-IN'
-      u.volume = 1
-      u.onstart  = () => setVoiceState('playing')
-      u.onpause  = () => setVoiceState('paused')
-      u.onresume = () => setVoiceState('playing')
-      u.onend    = () => setVoiceState('idle')
-      u.onerror  = () => setVoiceState('idle')
-      utteranceRef.current = u
-      window.speechSynthesis.speak(u)
-      setVoiceState('playing')
-    } else if (voiceState === 'playing') {
-      window.speechSynthesis.pause()
-      setVoiceState('paused')
-    } else if (voiceState === 'paused') {
-      window.speechSynthesis.resume()
-      setVoiceState('playing')
-    }
-  }
 
   // ── Typewriter ────────────────────────────────────────────
   useEffect(() => {
@@ -128,9 +38,6 @@ export default function Hero() {
   }, [displayed, typing, taglineIndex])
 
   const scrollToContact = () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
-
-  const voiceLabel = voiceState === 'idle' ? 'Know About Me' : voiceState === 'playing' ? 'Pause' : 'Resume'
-  const VoiceIcon  = voiceState === 'playing' ? FaPause : voiceState === 'paused' ? FaPlay : FaVolumeUp
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden">
@@ -244,41 +151,6 @@ export default function Hero() {
                 </button>
               </MagneticButton>
 
-              <MagneticButton strength={0.28}>
-                <button
-                  onClick={handleVoice}
-                  title={voiceLabel}
-                  className={`px-4 py-3 rounded-xl glass border transition-all duration-200 flex items-center gap-2 font-semibold text-sm ${
-                    voiceState !== 'idle'
-                      ? 'border-[var(--accent1)] text-[var(--accent1)] bg-[var(--accent1)]/10'
-                      : 'border-white/10 text-[#aaa6c3] hover:border-[var(--accent1)]/40 hover:text-white'
-                  }`}
-                >
-                  <AnimatePresence mode="wait">
-                    <motion.span
-                      key={voiceState}
-                      initial={{ scale: 0, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      exit={{ scale: 0, opacity: 0 }}
-                      transition={{ duration: 0.15 }}
-                      className="flex items-center gap-2"
-                    >
-                      {voiceState === 'playing' ? (
-                        <motion.span
-                          animate={{ scale: [1, 1.3, 1] }}
-                          transition={{ repeat: Infinity, duration: 0.8 }}
-                          className="flex items-center"
-                        >
-                          <VoiceIcon size={16} />
-                        </motion.span>
-                      ) : (
-                        <VoiceIcon size={16} />
-                      )}
-                      {voiceLabel}
-                    </motion.span>
-                  </AnimatePresence>
-                </button>
-              </MagneticButton>
             </motion.div>
 
             {/* Social Icons */}
