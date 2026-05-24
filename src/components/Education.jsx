@@ -14,7 +14,7 @@ export default function Education() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="section-title gradient-text">Education</h2>
@@ -26,7 +26,7 @@ export default function Education() {
             key={edu.id}
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.15 }}
             transition={{ duration: 0.6, delay: i * 0.15 }}
             className="glass glass-hover p-5 sm:p-8 max-w-3xl mx-auto"
           >

@@ -9,25 +9,41 @@ const STATS = [
 ]
 
 function CountUp({ target, suffix, duration = 1800 }) {
-  const [count, setCount] = useState(0)
-  const ref    = useRef(null)
-  const started = useRef(false)
+  const [count, setCount]   = useState(0)
+  const ref      = useRef(null)
+  const timerRef = useRef(null)
+  const resetRef = useRef(null)
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !started.current) {
-        started.current = true
+      if (entry.isIntersecting) {
+        // Cancel any pending reset
+        clearTimeout(resetRef.current)
+        // Restart count from 0
+        clearInterval(timerRef.current)
+        setCount(0)
         let start = 0
         const step = target / (duration / 16)
-        const timer = setInterval(() => {
+        timerRef.current = setInterval(() => {
           start += step
-          if (start >= target) { setCount(target); clearInterval(timer) }
+          if (start >= target) { setCount(target); clearInterval(timerRef.current) }
           else setCount(Math.floor(start))
         }, 16)
+      } else {
+        // 600ms cooldown before resetting so brief scroll-past doesn't flash
+        resetRef.current = setTimeout(() => {
+          clearInterval(timerRef.current)
+          setCount(0)
+        }, 600)
       }
     }, { threshold: 0.3 })
+
     if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      clearInterval(timerRef.current)
+      clearTimeout(resetRef.current)
+    }
   }, [target, duration])
 
   return <span ref={ref}>{count}{suffix}</span>
@@ -48,7 +64,7 @@ export default function Stats() {
               key={stat.label}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="glass glass-hover p-5 rounded-2xl text-center"
             >

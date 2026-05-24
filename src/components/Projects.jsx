@@ -95,7 +95,7 @@ export default function Projects() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="section-title gradient-text">Projects</h2>
@@ -108,7 +108,7 @@ export default function Projects() {
               key={project.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.6, delay: i * 0.15 }}
               whileHover={{ y: -6 }}
               className="glass rounded-2xl overflow-hidden border border-white/5 hover:border-[#915eff]/30 transition-all duration-300 group flex flex-col"

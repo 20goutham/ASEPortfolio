@@ -21,7 +21,7 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="section-title gradient-text">About Me</h2>
@@ -34,7 +34,7 @@ export default function About() {
             custom={0}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.15 }}
             variants={fadeUp}
             className="glass glass-hover p-5 sm:p-8"
           >
@@ -57,7 +57,7 @@ export default function About() {
               custom={1}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               variants={fadeUp}
               className="glass glass-hover p-6"
             >
@@ -83,7 +83,7 @@ export default function About() {
               custom={2}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               variants={fadeUp}
               className="glass p-6 border border-[#915eff]/30 rounded-2xl bg-gradient-to-br from-[#915eff]/10 to-[#06b6d4]/10"
             >
@@ -106,7 +106,7 @@ export default function About() {
               custom={3}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               variants={fadeUp}
               className="grid grid-cols-3 gap-4"
             >

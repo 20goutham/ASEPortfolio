@@ -25,7 +25,7 @@ export default function Resume() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="section-title gradient-text">Resume</h2>
@@ -35,7 +35,7 @@ export default function Resume() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.6 }}
           className="max-w-2xl mx-auto"
         >
@@ -94,7 +94,7 @@ export default function Resume() {
                     key={h}
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
+                    viewport={{ once: false, amount: 0.15 }}
                     transition={{ delay: i * 0.05 }}
                     className="px-3 py-1 glass rounded-lg text-xs text-[#aaa6c3] border border-white/5"
                   >

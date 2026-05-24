@@ -21,7 +21,7 @@ export default function Skills() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="section-title gradient-text">Skills</h2>
@@ -32,7 +32,7 @@ export default function Skills() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.15 }}
           className="flex flex-wrap justify-center gap-2 mb-10"
         >
           {CATEGORIES.map(cat => (
@@ -57,7 +57,7 @@ export default function Skills() {
               key={skill.name}
               initial={{ opacity: 0, x: i % 2 === 0 ? -30 : 30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.5, delay: i * 0.07 }}
               className="glass glass-hover p-5 rounded-xl"
             >
@@ -69,7 +69,7 @@ export default function Skills() {
                 <motion.div
                   initial={{ width: 0 }}
                   whileInView={{ width: `${skill.percent}%` }}
-                  viewport={{ once: true }}
+                  viewport={{ once: false, amount: 0.15 }}
                   transition={{ duration: 1.2, delay: i * 0.07, ease: 'easeOut' }}
                   className="h-full skill-bar-fill rounded-full"
                 />
@@ -83,7 +83,7 @@ export default function Skills() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.6 }}
         >
           <h3 className="text-center text-white font-semibold text-lg mb-6">
@@ -95,7 +95,7 @@ export default function Skills() {
                 key={tool}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.15 }}
                 transition={{ delay: i * 0.05 }}
                 whileHover={{ scale: 1.05, y: -2 }}
                 className="px-4 py-2 glass rounded-xl text-sm text-[#aaa6c3] border border-white/5 hover:border-[#915eff]/30 hover:text-white transition-all cursor-default"

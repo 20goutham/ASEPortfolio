@@ -100,7 +100,7 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="section-title gradient-text">Get in Touch</h2>
@@ -112,7 +112,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.15 }}
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
@@ -176,7 +176,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.15 }}
             transition={{ duration: 0.6 }}
           >
             <form ref={formRef} onSubmit={handleSubmit} className="glass p-5 sm:p-8 rounded-2xl space-y-5">

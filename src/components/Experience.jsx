@@ -20,7 +20,7 @@ export default function Experience() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.15 }}
           transition={{ duration: 0.5 }}
         >
           <h2 className="section-title gradient-text">Experience</h2>
@@ -36,7 +36,7 @@ export default function Experience() {
               key={exp.id}
               initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.15 }}
               transition={{ duration: 0.6, delay: i * 0.2 }}
               className="relative md:pl-16 mb-6 last:mb-0"
             >
