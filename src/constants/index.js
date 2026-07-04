@@ -65,29 +65,29 @@ export const EXPERIENCE = [
         ],
       },
       {
-        area: 'AI / NLP',
+        area: 'AI / NLP & Data Agent',
         points: [
           'Developed AI-powered NLP chatbot integrated with MWA for automated leave management',
+          'Built Data Agent for Flodata mapping validation using Python, FastAPI, React, Groq, Claude, and Presidio',
+          'Validated bulk mapping and source-data records with hybrid rule-based and AI-assisted semantic checks',
+          'Implemented multi-format parsing, field normalization, PII redaction, and structured request tracing',
           'Reduced manual HR intervention significantly through intelligent conversational flows',
         ],
       },
       {
-        area: 'Zoho Development & Integration',
+        area: 'Zoho, Keka & HR Integrations',
         points: [
           'Integrated Zoho People and Zoho Recruit with MWA for seamless HR data sync',
           'Led migration from Zoho CRM to Keka CRM using Python for data movement and transformation',
+          'Built Keka HRMS to MWA integration platform for high-volume onboarding, profile updates, exits, and manager assignment sync',
+          'Implemented Flask REST APIs, PostgreSQL audit logs, retry handling, sync watermarks, and replay support',
+          'Used Claude-assisted development for API logic, validation flows, and debugging',
           'Reduced CRM operational overhead by 30% through automation and integration',
-        ],
-      },
-      {
-        area: 'Keka & HR Integrations',
-        points: [
-          'Built two-way integration between Keka HR platform and MWA for automated attendance and leave sync',
           'Ensured real-time data consistency across platforms with error handling and logging',
         ],
       },
     ],
-    tech: ['Python', 'Flodata', 'Zoho People', 'Zoho Recruit', 'Keka CRM', 'Salesforce', 'NLP', 'REST APIs', 'SQL'],
+    tech: ['Python', 'FastAPI', 'Flask', 'React', 'Flodata', 'Groq', 'Claude', 'Presidio', 'PostgreSQL', 'Zoho People', 'Zoho Recruit', 'Keka CRM', 'Salesforce', 'NLP', 'REST APIs', 'SQL'],
   },
   {
     id: 2,
@@ -120,47 +120,6 @@ export const EXPERIENCE = [
 export const PROJECTS = [
   {
     id: 1,
-    title: 'Flodata Validation Agent',
-    description:
-      'A data quality and mapping validation platform that prevents failed migrations through pre-flight schema validation and post-extract source data checks.',
-    tech: ['Python', 'FastAPI', 'React', 'Groq API', 'Claude', 'Presidio', 'SQLAlchemy'],
-    highlights: [
-      'Hybrid AI/Python validation engine with Groq and Claude-assisted semantic review',
-      'Multi-format parser for CSV, Excel, PDF, DOCX, PPTX, and OCR inputs',
-      'PII redaction, structured logging, and deployment-ready API design',
-    ],
-    github: null,
-    live: null,
-    color: 'from-emerald-500 to-cyan-500',
-    caseStudy: {
-      problem: 'Data migration teams needed a reliable way to catch mapping errors, field mismatches, invalid formats, and sensitive data risks before migration jobs failed downstream.',
-      solution: 'Built a FastAPI and React platform that validates mapping sheets before migration and verifies extracted source data against mapping constraints. The engine combines deterministic fuzzy matching with Groq Llama 3 and Claude-assisted semantic checks for ambiguous rows.',
-      outcome: 'Created a deployment-ready validation workflow that can process bulk mapping and source-data records with lower manual review effort, reduced LLM calls, safer PII handling, and an extensible foundation for future live source connectors.',
-    },
-  },
-  {
-    id: 2,
-    title: 'Keka HRMS to MWA Integration Platform',
-    description:
-      'A production employee data synchronization platform connecting Keka HRMS with MWA for high-volume onboarding, profile updates, exits, and manager assignment sync.',
-    tech: ['Python', 'Flask', 'PostgreSQL', 'Claude', 'Gunicorn', 'httpx', 'pytest'],
-    highlights: [
-      'Automated daily Keka to MWA employee sync built to handle bulk employee records',
-      'Weekly reverse sync from MWA to Keka for dotted-line managers',
-      'PostgreSQL audit layer with run history, watermarks, and replay support',
-      'Claude-assisted implementation support for API logic, validation flows, and debugging',
-    ],
-    github: null,
-    live: null,
-    color: 'from-blue-500 to-teal-400',
-    caseStudy: {
-      problem: 'HR and operations teams were maintaining employee records across Keka HRMS and MWA manually, creating duplicated effort, delayed updates, and risk of inconsistent organizational data.',
-      solution: 'Designed and built a Flask REST API with scheduled sync jobs, bulk and single-employee triggers, retry handling, and PostgreSQL-backed audit logs. Used Claude during development to accelerate API logic, validation flow design, and debugging. Deployed the platform on Linux with Gunicorn, systemd services, and cron scheduling.',
-      outcome: 'Eliminated repetitive cross-system HR data entry and gave the team observable, replayable synchronization that can handle a strong volume of employee records between internal HRMS data and the client resource management system.',
-    },
-  },
-  {
-    id: 3,
     title: 'Leave Management System',
     description:
       'A full-featured leave management platform with multi-level approval workflows, conflict resolution, and automated reporting. Smart leave allocation with centralized record management.',
@@ -180,7 +139,7 @@ export const PROJECTS = [
     },
   },
   {
-    id: 4,
+    id: 2,
     title: 'URL Shortener',
     description:
       'A clean and functional URL shortener built with Django, featuring analytics for tracking URL usage and a fully responsive interface across all devices.',
